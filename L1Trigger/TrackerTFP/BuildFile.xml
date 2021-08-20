@@ -1,0 +1,37 @@
+e name="CommonTools/UtilAlgos"/>
+<use name="DataFormats/Common"/>
+<use name="DataFormats/L1TrackTrigger"/>
+<use name="DataFormats/JetReco"/>
+<use name="DataFormats/Math"/>
+<use name="DataFormats/Phase2TrackerDigi"/>
+<use name="FWCore/Framework"/>
+<use name="FWCore/ParameterSet"/>
+<use name="FWCore/ServiceRegistry"/>
+<use name="FWCore/Utilities"/>
+<use name="Geometry/Records"/>
+<use name="Geometry/TrackerGeometryBuilder"/>
+<use name="L1Trigger/TrackTrigger"/>
+<use name="L1Trigger/TrackerDTC"/>
+<use name="MagneticField/Engine"/>
+<use name="MagneticField/Records"/>
+<use name="SimDataFormats/EncodedEventId"/>
+<use name="SimDataFormats/Track"/>
+<use name="SimDataFormats/TrackingAnalysis"/>
+<use name="SimGeneral/TrackingAnalysis"/>
+<use name="SimTracker/TrackTriggerAssociation"/>
+<use name="boost"/>
+<use name="roothistmatrix"/>
+        <!-- Add no-misleading-indentation option to avoid warnings about bug in Boost library. -->
+<flags CXXFLAGS="-g"/>
+        <!--- Suppress warnings -->
+<flags CXXFLAGS="-Wno-unknown-pragmas -Wno-misleading-indentation"/>
+        <!-- THE FOLLOWING LINES ARE NEEDED IF YOU WANT TO USE LR HLS CODE, BUT THEY REQUIRE YOU TO HAVE VIVADO -->
+<use name="HLS"/>                        <!-- link to Vivado HLS libraries & header files -->
+<flags ADD_SUBDIR="1"/>                  <!-- Compile HLS/ subdirectories in src/ & interface/ -->
+<flags CXXFLAGS="-DUSE_HLS"/>            <!-- Define pragma variable to enable HLS code   -->
+        <!-- Suppress warnings from HLS library and HLS pragmas -->
+<flags CXXFLAGS="-Wno-unused-variable -Wno-uninitialized -Wno-int-in-bool-context -Wno-maybe-uninitialized -Wno-parentheses"/>
+        <!-- Compile HLS/ subdirectories in src/ & interface/ -->
+<export>
+    <lib name="1"/>
+</export>
