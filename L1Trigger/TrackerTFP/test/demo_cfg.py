@@ -36,8 +36,7 @@ process.load( 'L1Trigger.TrackerTFP.Demonstrator_cff' )
 # build schedule
 process.mc = cms.Sequence( process.StubAssociator )
 process.dtc = cms.Sequence( process.TrackerDTCProducer + process.TrackerDTCAnalyzer )
-process.gp = cms.Sequence( process.TrackerTFPProducerGP + process.TrackerTFPAnalyzerGP )
-process.tt = cms.Path( process.mc + process.dtc + process.gp )
+process.tt = cms.Path( process.mc + process.dtc )
 process.schedule = cms.Schedule( process.tt )
 
 # create options
