@@ -33,7 +33,8 @@ namespace trackerTFP {
       for (const TTDTC::Frame& frame : stream) {
         StubGP* stub = nullptr;
         if (frame.first.isNonnull()) {
-          stubsGP_.emplace_back(frame, dataFormats_);
+          std::cout << "processign LR fit function..." << std::endl;
+          // stubsGP_.emplace_back(frame, dataFormats_);
           stub = & stubsGP_.back();
         }
         input.push_back(stub);

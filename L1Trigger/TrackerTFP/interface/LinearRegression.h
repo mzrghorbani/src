@@ -14,6 +14,7 @@ namespace trackerTFP {
 
     // read in and organize input product
     void consume(const TTDTC::Streams& streams);
+    
     // fill output products
     void produce(TTDTC::Streams& stubs, TTDTC::Streams& tracks);
 
@@ -32,14 +33,6 @@ namespace trackerTFP {
     std::vector<StubLR> stubsLR_;
     //
     std::vector<std::vector<StubGP*>> input_;
-    //
-    double phiT_;
-    //
-    double qOverPt_;
-    //
-    double zT_;
-    //
-    double cot_;
   };
 
 }

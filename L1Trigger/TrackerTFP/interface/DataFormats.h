@@ -204,25 +204,6 @@ namespace trackerTFP {
     int sectorEta_;
   };
 
-    class StubGP : public Stub<double, double, double, int> {
-  public:
-    StubGP(const TTDTC::Frame& frame, const DataFormats* dataFormats, int sectorPhi, int sectorEta);
-    StubGP(const StubPP& stub, int sectorPhi, int sectorEta);
-    ~StubGP(){}
-    bool inQoverPtBin(int qOverPtBin) const { return qOverPtBins_[qOverPtBin]; }
-    std::vector<int> qOverPtBins() const { return qOverPtBins_.ids(); }
-    int sectorPhi() const { return sectorPhi_; }
-    int sectorEta() const { return sectorEta_; }
-    double r() const { return std::get<0>(data_); }
-    double phi() const { return std::get<1>(data_); }
-    double z() const { return std::get<2>(data_); }
-    int layer() const { return std::get<3>(data_); }
-  private:
-    TTBV qOverPtBins_;
-    int sectorPhi_;
-    int sectorEta_;
-  };
-
   class StubHT : public Stub<double, double, double, int, int, int, int> {
   public:
     StubHT(const TTDTC::Frame& frame, const DataFormats* dataFormats, int qOverPt);
