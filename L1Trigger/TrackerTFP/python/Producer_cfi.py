@@ -5,7 +5,7 @@ TrackerTFPProducer_params = cms.PSet (
 
   LabelDTC         = cms.string( "TrackerDTCProducer"    ), #
   LabelGP          = cms.string( "TrackerTFPProducerGP"  ), #
-  LabelLR          = cms.string( "TrackerTFPProducerLR"  ), #
+  LabelLF          = cms.string( "TrackerTFPProducerLF"  ), #
   BranchAccepted   = cms.string( "StubAccepted"  ),         # branch for prodcut with passed stubs
   BranchLost       = cms.string( "StubLost"      ),         # branch for prodcut with lost stubs
   BranchTracks     = cms.string( "TrackAccepted" ),         # branch for prodcut with passed track information

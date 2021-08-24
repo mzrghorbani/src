@@ -36,7 +36,9 @@ process.load( 'L1Trigger.TrackerTFP.Demonstrator_cff' )
 # build schedule
 process.mc = cms.Sequence( process.StubAssociator )
 process.dtc = cms.Sequence( process.TrackerDTCProducer + process.TrackerDTCAnalyzer )
-process.tt = cms.Path( process.mc + process.dtc )
+process.gp = cms.Sequence( process.TrackerTFPProducerGP + process.TrackerTFPAnalyzerGP )
+process.lf = cms.Sequence( process.TrackerTFPProducerLF + process.TrackerTFPAnalyzerLF + process.TrackerTFPDemonstrator )
+process.tt = cms.Path( process.mc + process.dtc + process.gp + process.lf )
 process.schedule = cms.Schedule( process.tt )
 
 # create options
@@ -45,7 +47,7 @@ options = VarParsing.VarParsing( 'analysis' )
 # specify input MC
 Samples = {
     'file:./L1Trigger/TrackerTFP/test/D3629C85-EA34-C147-AC4D-939C41DEC68A.root'
-    # '/store/relval/CMSSW_11_1_0_pre1/RelValTTbar_14TeV/GEN-SIM-DIGI-RAW/PU25ns_110X_mcRun4_realistic_v2_2026D49PU200_ext1-v1/20000/0330453B-9B8E-CA41-88B0-A047B68D1AF9.root',
+    # '/store/relval/CMSSW_11_1_0_pre1/RelValTTbar_14TeV/GEN-SIM-DIGI-RAW/PU25ns_110X_mcRun4_realistic_v2_2026D49PU200_ext1-v1/20000/0330453B-9B8E-CA41-88B0-A047B68D1AF9.root'
     # '/store/relval/CMSSW_11_1_0_pre1/RelValTTbar_14TeV/GEN-SIM-DIGI-RAW/PU25ns_110X_mcRun4_realistic_v2_2026D49PU200_ext1-v1/20000/02180D14-024D-ED46-9899-B275EADB82CE.root',
     # '/store/relval/CMSSW_11_1_0_pre1/RelValTTbar_14TeV/GEN-SIM-DIGI-RAW/PU25ns_110X_mcRun4_realistic_v2_2026D49PU200_ext1-v1/20000/0207F436-9BAC-904D-B86A-C2CE18CC2A46.root',
     # '/store/relval/CMSSW_11_1_0_pre1/RelValTTbar_14TeV/GEN-SIM-DIGI-RAW/PU25ns_110X_mcRun4_realistic_v2_2026D49PU200_ext1-v1/20000/01323A12-1A0B-AE43-B7AB-BAAE294E4EFA.root',

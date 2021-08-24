@@ -13,9 +13,9 @@
 
 namespace trackerTFP {
 
-  enum class Process { begin, fe = begin, dtc, pp, gp, ht, mht, lr, end, x };
+  enum class Process { begin, fe = begin, dtc, pp, gp, lf, end, x };
   enum class Variable { begin, r = begin, phi, z, layer, sectorsPhi, sectorEta, sectorPhi, phiT, qOverPt, zT, cot, end, x };
-  constexpr std::initializer_list<Process> Processes = {Process::fe, Process::dtc, Process::pp, Process::gp, Process::ht, Process::mht, Process::lr};
+  constexpr std::initializer_list<Process> Processes = {Process::fe, Process::dtc, Process::pp, Process::gp, Process::lf};
   constexpr std::initializer_list<Variable> Variables = {Variable::r, Variable::phi, Variable::z, Variable::layer, Variable::sectorsPhi, Variable::sectorEta, Variable::sectorPhi, Variable::phiT, Variable::qOverPt, Variable::zT, Variable::cot};
   inline constexpr int operator+(Process p) { return static_cast<int>(p); }
   inline constexpr int operator+(Variable v) { return static_cast<int>(v); }
@@ -58,50 +58,43 @@ namespace trackerTFP {
     ~Format() {}
   };
 
-  template<> Format<Variable::phiT, Process::ht>::Format(const trackerDTC::Setup* setup);
-  template<> Format<Variable::phiT, Process::mht>::Format(const trackerDTC::Setup* setup);
-  template<> Format<Variable::qOverPt, Process::ht>::Format(const trackerDTC::Setup* setup);
-  template<> Format<Variable::qOverPt, Process::mht>::Format(const trackerDTC::Setup* setup);
-  template<> Format<Variable::r, Process::ht>::Format(const trackerDTC::Setup* setup);
-  template<> Format<Variable::phi, Process::ht>::Format(const trackerDTC::Setup* setup);
-  template<> Format<Variable::phi, Process::mht>::Format(const trackerDTC::Setup* setup);
-  template<> Format<Variable::phi, Process::gp>::Format(const trackerDTC::Setup* setup);
   template<> Format<Variable::phi, Process::dtc>::Format(const trackerDTC::Setup* setup);
   template<> Format<Variable::z, Process::dtc>::Format(const trackerDTC::Setup* setup);
+
+  template<> Format<Variable::phi, Process::gp>::Format(const trackerDTC::Setup* setup);
   template<> Format<Variable::z, Process::gp>::Format(const trackerDTC::Setup* setup);
-  template<> Format<Variable::layer, Process::ht>::Format(const trackerDTC::Setup* setup);
   template<> Format<Variable::sectorEta, Process::gp>::Format(const trackerDTC::Setup* setup);
   template<> Format<Variable::sectorPhi, Process::gp>::Format(const trackerDTC::Setup* setup);
   template<> Format<Variable::sectorsPhi, Process::gp>::Format(const trackerDTC::Setup* setup);
-  template<> Format<Variable::phiT, Process::lr>::Format(const trackerDTC::Setup* setup);
-  template<> Format<Variable::qOverPt, Process::lr>::Format(const trackerDTC::Setup* setup);
-  template<> Format<Variable::zT, Process::lr>::Format(const trackerDTC::Setup* setup);
-  template<> Format<Variable::cot, Process::lr>::Format(const trackerDTC::Setup* setup);
+
+  template<> Format<Variable::r, Process::lf>::Format(const trackerDTC::Setup* setup);
+  template<> Format<Variable::phi, Process::lf>::Format(const trackerDTC::Setup* setup);
+  template<> Format<Variable::layer, Process::lf>::Format(const trackerDTC::Setup* setup);
+  template<> Format<Variable::phiT, Process::lf>::Format(const trackerDTC::Setup* setup);
+  template<> Format<Variable::qOverPt, Process::lf>::Format(const trackerDTC::Setup* setup);
 
   class DataFormats {
   private:
     static constexpr std::array<std::array<Process, +Process::end>, +Variable::end> config_ = {{
-    //  Process::fe  Process::dtc  Process::pp   Process::gp  Process::ht  Process::mht  Process::lr
-      {{Process::x,  Process::ht,  Process::ht,  Process::ht, Process::ht, Process::ht,  Process::ht }}, // Variable::r
-      {{Process::x,  Process::dtc, Process::dtc, Process::gp, Process::ht, Process::mht, Process::mht}}, // Variable::phi
-      {{Process::x,  Process::dtc, Process::dtc, Process::gp, Process::gp, Process::gp,  Process::gp }}, // Variable::z
-      {{Process::x,  Process::ht,  Process::ht,  Process::ht, Process::ht, Process::ht,  Process::ht }}, // Variable::layer
-      {{Process::x,  Process::dtc, Process::dtc, Process::x,  Process::x,  Process::x,   Process::x  }}, // Variable::sectorsPhi
-      {{Process::x,  Process::gp,  Process::gp,  Process::gp, Process::gp, Process::gp,  Process::gp }}, // Variable::sectorEta
-      {{Process::x,  Process::x,   Process::x,   Process::gp, Process::gp, Process::gp,  Process::gp }}, // Variable::sectorPhi
-      {{Process::x,  Process::ht,  Process::ht,  Process::ht, Process::ht, Process::mht, Process::lr }}, // Variable::phiT
-      {{Process::x,  Process::ht,  Process::ht,  Process::ht, Process::ht, Process::mht, Process::lr }}, // Variable::qOverPt
-      {{Process::x,  Process::x,   Process::x,   Process::x,  Process::x,  Process::x,   Process::lr }}, // Variable::zT
-      {{Process::x,  Process::x,   Process::x,   Process::x,  Process::x,  Process::x,   Process::lr }}, // Variable::cot
+    //  Process::fe  Process::dtc  Process::pp   Process::gp  Process::lf
+      {{Process::x,  Process::lf,  Process::lf,  Process::lf, Process::lf}}, // Variable::r
+      {{Process::x,  Process::dtc, Process::dtc, Process::gp, Process::lf}}, // Variable::phi
+      {{Process::x,  Process::dtc, Process::dtc, Process::gp, Process::gp}}, // Variable::z
+      {{Process::x,  Process::lf,  Process::lf,  Process::lf, Process::lf}}, // Variable::layer
+      {{Process::x,  Process::dtc, Process::dtc, Process::x,  Process::x }}, // Variable::sectorsPhi
+      {{Process::x,  Process::gp,  Process::gp,  Process::gp, Process::gp}}, // Variable::sectorEta
+      {{Process::x,  Process::x,   Process::x,   Process::gp, Process::gp}}, // Variable::sectorPhi
+      {{Process::x,  Process::lf,  Process::lf,  Process::lf, Process::lf}}, // Variable::phiT
+      {{Process::x,  Process::lf,  Process::lf,  Process::lf, Process::lf}}, // Variable::qOverPt
+      {{Process::x,  Process::x,   Process::x,   Process::x,  Process::x }}, // Variable::zT
+      {{Process::x,  Process::x,   Process::x,   Process::x,  Process::x }}, // Variable::cot
     }};
     static constexpr std::array<std::initializer_list<Variable>, +Process::end> stubs_ = {{
       {},                                                                                                                                                                  // Process::fe
       {Variable::r, Variable::phi, Variable::z, Variable::layer, Variable::sectorsPhi, Variable::sectorEta, Variable::sectorEta, Variable::qOverPt, Variable::qOverPt},    // Process::dtc
       {Variable::r, Variable::phi, Variable::z, Variable::layer, Variable::sectorsPhi, Variable::sectorEta, Variable::sectorEta, Variable::qOverPt, Variable::qOverPt},    // Process::pp
       {Variable::r, Variable::phi, Variable::z, Variable::layer, Variable::qOverPt, Variable::qOverPt},                                                                    // Process::gp
-      {Variable::r, Variable::phi, Variable::z, Variable::layer, Variable::sectorPhi, Variable::sectorEta, Variable::phiT},                                                // Process::ht
-      {Variable::r, Variable::phi, Variable::z, Variable::layer, Variable::sectorPhi, Variable::sectorEta, Variable::phiT, Variable::qOverPt},                             // Process::mht
-      {Variable::phiT, Variable::qOverPt, Variable::zT, Variable::cot} // Process::lr
+      {Variable::r, Variable::phi, Variable::z, Variable::layer, Variable::sectorPhi, Variable::sectorEta, Variable::phiT}                                                 // Process::lf
     }};
   public:
     DataFormats();
@@ -204,11 +197,11 @@ namespace trackerTFP {
     int sectorEta_;
   };
 
-  class StubHT : public Stub<double, double, double, int, int, int, int> {
+  class StubLF : public Stub<double, double, double, int, int, int, int> {
   public:
-    StubHT(const TTDTC::Frame& frame, const DataFormats* dataFormats, int qOverPt);
-    StubHT(const StubGP& stub, int qOverPt, int phiT);
-    ~StubHT(){}
+    StubLF(const TTDTC::Frame& frame, const DataFormats* dataFormats, int qOverPt);
+    StubLF(const StubGP& stub, int qOverPt, int phiT);
+    ~StubLF(){}
     int qOverPt() const { return qOverPt_; }
     double r() const { return std::get<0>(data_); };
     double phi() const { return std::get<1>(data_); };
@@ -220,36 +213,6 @@ namespace trackerTFP {
   private:
     void fillTrackId();
     int qOverPt_;
-  };
-
-  class StubMHT : public Stub<double, double, double, int, int, int, int, int> {
-  public:
-    StubMHT(const TTDTC::Frame& frame, const DataFormats* dataFormats);
-    StubMHT(const StubHT& stub, int phiT, int qOverPt);
-    ~StubMHT(){}
-    double r() const { return std::get<0>(data_); }
-    double phi() const { return std::get<1>(data_); }
-    double z() const { return std::get<2>(data_); }
-    int layer() const { return std::get<3>(data_); }
-    int sectorPhi() const { return std::get<4>(data_); }
-    int sectorEta() const { return std::get<5>(data_); }
-    int phiT() const { return std::get<6>(data_); }
-    int qOverPt() const { return std::get<7>(data_); }
-    bool barrel() const;
-    bool psModule() const;
-  private:
-    void fillTrackId();
-  };
-
-  class StubLR : public Stub<double, double, double, double> {
-  public:
-    StubLR(const TTDTC::Frame& frame, const DataFormats* dataFormats);
-    StubLR(const StubMHT& stub, double phiT, double qOverPt, double zT, double cot);
-    ~StubLR() {}
-    double phiT() const { return std::get<0>(data_); }
-    double qOverPt() const { return std::get<1>(data_); }
-    double zT() const { return std::get<2>(data_); }
-    double cot() const { return std::get<3>(data_); }
   };
 
 } // namespace trackerTFP
