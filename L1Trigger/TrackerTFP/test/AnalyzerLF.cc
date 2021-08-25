@@ -137,7 +137,7 @@ namespace trackerTFP {
   }
 
   void AnalyzerLF::analyze(const Event& iEvent, const EventSetup& iSetup) {
-    // read in ht products
+    // read in lf products
     Handle<TTDTC::Streams> handleAccepted;
     iEvent.getByToken<TTDTC::Streams>(edGetTokenAccepted_, handleAccepted);
     Handle<TTDTC::Streams> handleLost;
@@ -154,7 +154,7 @@ namespace trackerTFP {
       iEvent.getByToken<StubAssociation>(edGetTokenReconstructable_, handleReconstructable);
       reconstructable = handleReconstructable.product();
     }
-    // analyze ht products and associate found tracks with reconstrucable TrackingParticles
+    // analyze lf products and associate found tracks with reconstrucable TrackingParticles
     set<TPPtr> tpPtrs;
     set<TPPtr> tpPtrsSelection;
     set<TPPtr> tpPtrsLost;
